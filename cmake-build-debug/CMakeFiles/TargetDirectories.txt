@@ -1,0 +1,3 @@
+/Volumes/HD_EXTERNO/paradas_de_algoritmo/Sexto _semestre/compiladores/projeto1_com_goto/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Volumes/HD_EXTERNO/paradas_de_algoritmo/Sexto _semestre/compiladores/projeto1_com_goto/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Volumes/HD_EXTERNO/paradas_de_algoritmo/Sexto _semestre/compiladores/projeto1_com_goto/cmake-build-debug/CMakeFiles/projeto1_com_goto.dir
