@@ -78,24 +78,25 @@ void questionario () {
                 "    cin>>f;\n"
                 "    goto e0;\n"
                 "\n");
-    int b;
+
             for(int i = 0; i < m; i++) {
-                b = 0;
                 fprintf(arq, "    e%i:\n", i);
                     fprintf(arq, "    if(f[p] == '%c'){\n"
                                  "        p++;\n"
                                  "        goto e%i;\n"
-                                 "    }\n",sig[i],b);
-                    b++;
+                                 "    }\n",sig[i],i);
                     for (int j = 0; j < m; j++) {
+                        if (j == i) {
+
+                        } else {
                             fprintf(arq, "    else\n"
                                          "     if(f[p] == '%c'){\n"
                                          "       goto e%i;\n"
-                                         "  }\n", sig[j], b);
-                            b++;
+                                         "  }\n", sig[j], j);
+                        }
                     }
                     fprintf(arq, "    else\n"
-                                 "    if(f[p] == '0'){\n"
+                                 "    if(f[p] == 0){\n"
                                  "        p++;\n"
                                  "        goto aceita;\n"
                                  "    }\n"
