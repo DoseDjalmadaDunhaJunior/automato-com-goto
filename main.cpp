@@ -78,43 +78,32 @@ void questionario () {
                 "    cin>>f;\n"
                 "    goto e0;\n"
                 "\n");
-    int a;
-    for (int m1 = 0; m1 <= m; m1++) {
-        a = m1;
-        if (a == m) {
-            fprintf(arq,"if(f[p] == '0'){\n"
-                         "        p++;\n"
-                         "        goto aceita;\n"
-                         "    }\n"
-                         "    else{\n"
-                         "        p++;\n"
-                         "        goto rejeita;\n"
-                         "}\n", m1);
-        } else {
+    int b;
             for(int i = 0; i < m; i++) {
-                if (i == 0) {
-                    fprintf(arq, "    e%i:\n"
-                                 "    if(f[p] == '%c'){\n"
+                b = 0;
+                fprintf(arq, "    e%i:\n", i);
+                    fprintf(arq, "    if(f[p] == '%c'){\n"
                                  "        p++;\n"
                                  "        goto e%i;\n"
-                                 "    }\n"
-                                 "else{\n"
-                                 "goto rejeita;\n"
-                                 "}\n", m1, sig[m1], a++);
-                }
-                else{
+                                 "    }\n",sig[i],b);
+                    b++;
+                    for (int j = 0; j < m; j++) {
+                            fprintf(arq, "    else\n"
+                                         "     if(f[p] == '%c'){\n"
+                                         "       goto e%i;\n"
+                                         "  }\n", sig[j], b);
+                            b++;
+                    }
                     fprintf(arq, "    else\n"
-                                 "    if(f[p] == '%c'){\n"
+                                 "    if(f[p] == '0'){\n"
                                  "        p++;\n"
-                                 "        goto e%i;\n"
+                                 "        goto aceita;\n"
                                  "    }\n"
                                  "else{\n"
                                  "goto rejeita;\n"
-                                 "}\n", m1, sig[m1], a++);
+                                 "}\n");
                 }
-            }
-        }
-    }
+
     fprintf(arq, "    aceita:\n"
                  "    printf(\"Aceita\\n\");\n"
                  "    return 0;\n"
