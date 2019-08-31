@@ -15,13 +15,13 @@ typedef struct ponto e;
 char sig[200]; // simblos
 int Q; //quantidade de estados
 int S[200][200]; // matriz
-int qo; // caso de entrada
+int qo = 0; // caso de entrada (para facilitar o raciocinio inicialmente ele sera fixo em e0)
 int F; // quantidade de casos finais
 int fin[200]; // casos finais
+int n, m;// m = quantidade de simbolos
 FILE *arq;
 
 void questionario () {
-    int n, m;
     char aux;
     puts("quantos simbolos?");
     scanf("%i", &n);
@@ -40,8 +40,8 @@ void questionario () {
         scanf("%i", &n);
         fin[j] = n;
     }
-    puts("qual o estado inicial?");
-    scanf("%i", &qo);
+    //puts("qual o estado inicial?");
+    //scanf("%i", &qo);
 
     for (int k = 0; k < Q; k++) {
         for (int i = 0; i < m; i++) {
@@ -53,7 +53,8 @@ void questionario () {
     puts("impressao");
     printf("quant simbulos: %i\n"
            "n estados: %i\n"
-           "n estados finais %i\n", m, Q, F);
+           "n estados finais %i\n"
+           "caso inicial: %i\n", m, Q, F,qo);
     puts("estados finais");
     for (int i1 = 0; i1 < Q; i1++) {
         cout << fin[i1] << " ";
@@ -93,49 +94,54 @@ void questionario () {
                      "    printf(\"Cadeia: \");\n"
                      "    cin>>f;\n"
                      "    goto e%i;\n", qo);
-
-        fprintf(arq, "\n"
-                     "    e0:\n"
-                     "    if(f[p] == 'a'){\n"
+        for (int i = 0; i < Q; i++) {
+            n = (i + 1);
+            int verQ = Q;
+            int vern = n;
+            int verm = m;
+            if(n > Q){
+                fprintf(arq, "\n"
+                             "\te%i:\n"
+                             "\tif(f[p] == 0){\n"
+                             "\t\tp++;\n"
+                             "\t\tgoto e%i;\n"
+                             "\t}\n"
+                             "\telse{\n"
+                             "\t\tgoto rejeita();\n"
+                             "}\n", i,n);
+            }else {
+                fprintf(arq, "\n"
+                             "    e%i:\n"
+                             "    if(f[p] == '%c'){\n"
+                             "        p++;\n"
+                             "        goto e%i;\n"
+                             "    }\n", i, sig[i], n);
+            }
+            for (int j = 0; j < m; j++) {
+                n = (j + 1);
+                if (n < m) {
+                    fprintf(arq, "\telse\n"
+                                 "\t\tif(f[p] == '%c'){\n"
+                                 "\t\t\tgoto e%i;\n"
+                                 "}\n", sig[n],n);
+                }
+                else{
+                    fprintf(arq, "    else{\n"
+                                 "        p++;\n"
+                                 "        goto rejeita;\n"
+                                 "    }\n");
+                }
+            }
+        }
+        fprintf(arq, "    aceita:\n"
                      "        p++;\n"
-                     "        goto e1;\n"
+                     "        puts(""aceita"");\n"
                      "    }\n"
-                     "    else if(f[p] == 'b'){\n"
-                     "        p++;\n"
-                     "        goto e2;\n"
-                     "    }\n"
-                     "    else{\n"
-                     "        goto rejeita;\n"
-                     "    }\n"
-                     "\n"
-                     "    e1:\n"
-                     "    if(f[p] == 'a'){\n"
-                     "        p++;\n"
-                     "        goto rejeita;\n"
-                     "    }\n"
-                     "    else if(f[p] == 'b'){\n"
-                     "        p++;\n"
-                     "        goto e2;\n"
-                     "    }\n"
-                     "    else{\n"
-                     "        goto rejeita;\n"
-                     "    }\n"
-                     "    e2:\n"
-                     "    if (f[p] == '\\0'){\n"
-                     "        goto aceita;\n"
-                     "    } else{\n"
-                     "        goto rejeita;\n"
-                     "    }\n"
-                     "\n"
-                     "    aceita:\n"
-                     "    printf(\"Aceita\\n\");\n"
-                     "    return 0;\n"
-                     "\n"
                      "    rejeita:\n"
-                     "    printf(\"Rejeita\\n\");\n"
-                     "    return 0;\n"
-                     "}");
-    }
+                     "        p++;\n"
+                     "        puts(""rejeita"");\n"
+                     "    }\n");
+       }
     else if(op == 2){
 
     }
