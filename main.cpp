@@ -1,52 +1,55 @@
 #include <iostream>
-#include <stdio.h>
-
 using namespace std;
 
-int main(){
-    char f[200];
-    int p = 0;
-    printf("Cadeia: ");
-    cin>>f;
-    goto e0;
+void e0();
+void e1();
+void e3();
+void aceita();
+void rejeita();
 
-    e0:
+char f[200];
+int p;
+
+void e0(){
     if(f[p] == 'a'){
         p++;
-        goto e1;
-    }
-    else if(f[p] == 'b'){
-        p++;
-        goto e2;
+        e1();
     }
     else{
-        goto rejeita;
+        rejeita();
     }
+}
 
-    e1:
-    if(f[p] == 'a'){
+void e1(){
+    if(f[p] == 'b'){
         p++;
-        goto rejeita;
-    }
-    else if(f[p] == 'b'){
-        p++;
-        goto e2;
-    }
-    else{
-        goto rejeita;
-    }
-    e2:
-    if (f[p] == '\0'){
-        goto aceita;
+        e3();
     } else{
-        goto rejeita;
+        rejeita();
     }
+}
 
-    aceita:
-    printf("Aceita\n");
-    return 0;
+void e3(){
+    if(f[p] == '\0'){
+        p++;
+        aceita();
+    } else{
+        rejeita();
+    }
+}
 
-    rejeita:
-    printf("Rejeita\n");
+void aceita(){
+    puts("viva!!!");
+    exit(0);
+}
+
+void rejeita(){
+    puts(":c");
+    exit(0);
+}
+
+int main() {
+    cin>>f;
+    e0();
     return 0;
 }
