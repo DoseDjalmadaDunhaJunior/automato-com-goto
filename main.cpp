@@ -3,6 +3,15 @@
 #include <stdlib.h>
 using namespace std;
 
+struct ponto{
+    int es;
+    char l1;
+    char l2;
+    char l3;
+};
+
+typedef struct ponto e;
+
 char sig[200];
 int Q;
 int S[200][200];
@@ -44,7 +53,7 @@ void questionario () {
            "n estados finais %i\n", m, Q, F);
     puts("estados finais");
     for (int i1 = 0; i1 < Q; i1++) {
-        cout<<fin[i1]<<" ";
+        cout << fin[i1] << " ";
     }
     puts("");
     printf("S | ");
@@ -71,40 +80,33 @@ void questionario () {
                  "using namespace std;\n"
                  "#include <stdio.h>\n"
                  "\n");
-    fprintf(arq,"int main(){\n"
-                "    char f[200];\n"
-                "    int p = 0;\n"
-                "    printf(\"Cadeia: \");\n"
-                "    cin>>f;\n"
-                "    goto e0;\n"
-                "\n");
+    fprintf(arq, "int main(){\n"
+                 "    char f[200];\n"
+                 "\tint ok = 0;\n"
+                 "    int p = 0;\n");
+    fprintf(arq, "    printf(\"Cadeia: \");\n"
+                 "    cin>>f;\n"
+                 "    goto e0;\n"
+                 "\n");
 
-            for(int i = 0; i < m; i++) {
-                fprintf(arq, "    e%i:\n", i);
-                    fprintf(arq, "    if(f[p] == '%c'){\n"
-                                 "        p++;\n"
-                                 "        goto e%i;\n"
-                                 "    }\n",sig[i],i);
-                    for (int j = 0; j < m; j++) {
-                        if (j == i) {
+    for (int i = 0; i < m; i++) {
+        fprintf(arq, "    e%i:\n", i);
+        fprintf(arq, "    if(f[p] == '%c'){\n"
+                     "        p++;\n"
+                     "        goto e%i;\n"
+                     "    }\n", sig[i], i);
+        for (int j = 0; j < m; j++) {
+            if (j == i) {
 
-                        } else {
-                            fprintf(arq, "    else\n"
-                                         "     if(f[p] == '%c'){\n"
-                                         "       goto e%i;\n"
-                                         "  }\n", sig[j], j);
-                        }
-                    }
-                    fprintf(arq, "    else\n"
-                                 "    if(f[p] == 0){\n"
-                                 "        p++;\n"
-                                 "        goto aceita;\n"
-                                 "    }\n"
-                                 "else{\n"
-                                 "goto rejeita;\n"
-                                 "}\n");
-                }
-
+            } else {
+                fprintf(arq, "    else\n"
+                             "     if(f[p] == '%c'){\n"
+                             "\tp++;\n"
+                             "       goto e%i;\n"
+                             "  }\n", sig[j], j);
+            }
+        }
+    }
     fprintf(arq, "    aceita:\n"
                  "    printf(\"Aceita\\n\");\n"
                  "    return 0;\n"
@@ -114,7 +116,6 @@ void questionario () {
                  "    return 0;\n"
                  "}\n");
 }
-
 int main() {
     questionario();
     return 0;
