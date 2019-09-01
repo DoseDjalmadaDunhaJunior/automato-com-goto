@@ -16,12 +16,18 @@ void e0(){
         p++;
         e1();
     }
+	else{
+	rejeita();
+	}
 }
 void e1(){
     if(f[p] == 'b'){
         p++;
         e2();
     }
+	else{
+	rejeita();
+	}
 }
 
 void e2(){
@@ -33,6 +39,15 @@ void e2(){
         rejeita();
 	exit(0);
     }
+}
+void aceita(){
+    puts("viva!!!");
+    exit(0);
+}
+
+void rejeita(){
+    puts(":c");
+    exit(0);
 }
 
 int main() {

@@ -188,9 +188,21 @@ void questionario () {
                              "        p++;\n"
                              "        e%i();\n"
                              "    }\n"
+                             "\telse{\n"
+                             "\trejeita();\n"
+                             "\t}\n"
                              "}\n", j, sig[j], n);
             }
         }
+        fprintf(arq,"void aceita(){\n"
+                    "    puts(\"viva!!!\");\n"
+                    "    exit(0);\n"
+                    "}\n"
+                    "\n"
+                    "void rejeita(){\n"
+                    "    puts(\":c\");\n"
+                    "    exit(0);\n"
+                    "}\n");
         fprintf(arq, "\nint main() {\n"
                      "    cin>>f;\n"
                      "    e0();\n"
