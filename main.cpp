@@ -159,55 +159,45 @@ void questionario () {
     else if(op == 2){
         fprintf(arq, "#include <iostream>\n"
                      "using namespace std;\n"
-                     "\n"
-                     "void e0();\n"
-                     "void e1();\n"
-                     "void e3();\n"
-                     "void aceita();\n"
+                     "\n");
+        for (int i = 0; i < Q; i++) {
+            fprintf(arq, "void e%i();\n", i);
+        }
+        fprintf(arq,"\nvoid aceita();\n"
                      "void rejeita();\n"
-                     "\n"
-                     "char f[200];\n"
+                     "\n");
+        fprintf(arq, "char f[200];\n"
                      "int p;\n"
-                     "\n"
-                     "void e0(){\n"
-                     "    if(f[p] == 'a'){\n"
+                     "\n");
+        for (int j = 0; j < Q; j++) {
+            n = (j + 1);
+        fprintf(arq, "void e%i(){\n"
+                     "    if(f[p] == '%c'){\n"
                      "        p++;\n"
-                     "        e1();\n"
+                     "        e%i();\n"
                      "    }\n"
-                     "    else{\n"
-                     "        rejeita();\n"
-                     "    }\n"
-                     "}\n"
-                     "\n"
-                     "void e1(){\n"
-                     "    if(f[p] == 'b'){\n"
-                     "        p++;\n"
-                     "        e3();\n"
-                     "    } else{\n"
-                     "        rejeita();\n"
-                     "    }\n"
-                     "}\n"
-                     "\n"
-                     "void e3(){\n"
-                     "    if(f[p] == '\\0'){\n"
-                     "        p++;\n"
-                     "        aceita();\n"
-                     "    } else{\n"
-                     "        rejeita();\n"
-                     "    }\n"
-                     "}\n"
-                     "\n"
-                     "void aceita(){\n"
-                     "    puts(\"viva!!!\");\n"
-                     "    exit(0);\n"
-                     "}\n"
-                     "\n"
-                     "void rejeita(){\n"
-                     "    puts(\":c\");\n"
-                     "    exit(0);\n"
-                     "}\n"
-                     "\n"
-                     "int main() {\n"
+                     "}\n",j,sig[j],n);
+        if(j == (Q - 1)){
+            fprintf(arq, "\n"
+                         "void e%i(){\n"
+                         "    if(f[p] == 0){\n"
+                         "        p++;\n"
+                         "        aceita();\n"
+                         "\texit(0);\n"
+                         "    } else{\n"
+                         "        rejeita();\n"
+                         "\texit(0);\n"
+                         "    }\n"
+                         "}\n",j);
+        }
+        }
+        for (int k = 0; k < m; k++) {
+        }
+        fprintf(arq,                     "    else{\n"
+                                         "        rejeita();\n"
+                                         "    }\n"
+                                         "}\n");
+        fprintf(arq, "\nint main() {\n"
                      "    cin>>f;\n"
                      "    e0();\n"
                      "    return 0;\n"
