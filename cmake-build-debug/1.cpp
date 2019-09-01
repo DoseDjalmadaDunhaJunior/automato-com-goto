@@ -43,19 +43,16 @@ int main(){
         p++;
         goto aceita;
     }
-	else
-	if(f[p] == 'b'){
-		goto e2;
-}
-    else{
-        p++;
-        goto rejeita;
-    }
+	else{
+	goto rejeita;
+	}
     aceita:
         p++;
         puts("aceita");
+	return 0;
     
     rejeita:
         p++;
         puts("rejeita");
+	return 0;
     }

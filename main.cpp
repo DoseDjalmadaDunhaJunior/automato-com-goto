@@ -99,7 +99,7 @@ void questionario () {
             int verQ = Q;
             int vern = n;
             int verm = m;
-            if(n > Q){
+            if (n > Q) {
                 fprintf(arq, "\n"
                              "\te%i:\n"
                              "\tif(f[p] == \'\n\'){\n"
@@ -108,17 +108,30 @@ void questionario () {
                              "\t}\n"
                              "\telse{\n"
                              "\t\tgoto rejeita();\n"
-                             "}\n", i,n);
-            }else {
-                if (i == (Q-1)) {
+                             "}\n", i, n);
+            } else {
+                if (i == (Q - 1)) {
                     fprintf(arq, "\n"
                                  "    e%i:\n"
                                  "    if(f[p] == 0){\n"
                                  "        p++;\n"
                                  "        goto aceita;\n"
+                                 "    }\n"
+                                 "\telse{\n"
+                                 "\tgoto rejeita;\n"
+                                 "\t}\n"
+                                 "    aceita:\n"
+                                 "        p++;\n"
+                                 "        puts(\"aceita\");\n"
+                                 "\treturn 0;\n"
+                                 "    \n"
+                                 "    rejeita:\n"
+                                 "        p++;\n"
+                                 "        puts(\"rejeita\");\n"
+                                 "\treturn 0;\n"
                                  "    }\n", i);
-                }
-                else{
+                    return;
+                } else {
                     fprintf(arq, "\n"
                                  "    e%i:\n"
                                  "    if(f[p] == '%c'){\n"
@@ -133,9 +146,8 @@ void questionario () {
                     fprintf(arq, "\telse\n"
                                  "\tif(f[p] == '%c'){\n"
                                  "\t\tgoto e%i;\n"
-                                 "}\n", sig[n],(n+1));
-                }
-                else{
+                                 "}\n", sig[n], (n + 1));
+                } else {
                     fprintf(arq, "    else{\n"
                                  "        p++;\n"
                                  "        goto rejeita;\n"
@@ -143,15 +155,7 @@ void questionario () {
                 }
             }
         }
-        fprintf(arq, "    aceita:\n"
-                     "        p++;\n"
-                     "        puts(\"aceita\");\n"
-                     "    \n"
-                     "    rejeita:\n"
-                     "        p++;\n"
-                     "        puts(\"rejeita\");\n"
-                     "    }\n");
-       }
+    }
     else if(op == 2){
         puts("falta ser implementado");
     }
