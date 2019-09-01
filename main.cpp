@@ -81,8 +81,8 @@ void questionario () {
     cin >> nome;
     strcat(nome, txt);
     cout << nome << endl;
+    arq = fopen(nome, "w");
     if (op == 1) {
-        arq = fopen(nome, "w");
         fprintf(arq, "#include <iostream>\n"
                      "#include <stdio.h>\n"
                      "\n"
@@ -102,7 +102,7 @@ void questionario () {
             if(n > Q){
                 fprintf(arq, "\n"
                              "\te%i:\n"
-                             "\tif(f[p] == 0){\n"
+                             "\tif(f[p] == \'\n\'){\n"
                              "\t\tp++;\n"
                              "\t\tgoto e%i;\n"
                              "\t}\n"
@@ -110,19 +110,29 @@ void questionario () {
                              "\t\tgoto rejeita();\n"
                              "}\n", i,n);
             }else {
-                fprintf(arq, "\n"
-                             "    e%i:\n"
-                             "    if(f[p] == '%c'){\n"
-                             "        p++;\n"
-                             "        goto e%i;\n"
-                             "    }\n", i, sig[i], n);
+                if (i == (Q-1)) {
+                    fprintf(arq, "\n"
+                                 "    e%i:\n"
+                                 "    if(f[p] == 0){\n"
+                                 "        p++;\n"
+                                 "        goto aceita;\n"
+                                 "    }\n", i);
+                }
+                else{
+                    fprintf(arq, "\n"
+                                 "    e%i:\n"
+                                 "    if(f[p] == '%c'){\n"
+                                 "        p++;\n"
+                                 "        goto e%i;\n"
+                                 "    }\n", i, sig[i], n);
+                }
             }
             for (int j = 0; j < m; j++) {
                 n = (j + 1);
                 if (n < m) {
                     fprintf(arq, "\telse\n"
-                                 "\t\tif(f[p] == '%c'){\n"
-                                 "\t\t\tgoto e%i;\n"
+                                 "\tif(f[p] == '%c'){\n"
+                                 "\t\tgoto e%i;\n"
                                  "}\n", sig[n],n);
                 }
                 else{
@@ -135,15 +145,15 @@ void questionario () {
         }
         fprintf(arq, "    aceita:\n"
                      "        p++;\n"
-                     "        puts(""aceita"");\n"
-                     "    }\n"
+                     "        puts(\"aceita\");\n"
+                     "    \n"
                      "    rejeita:\n"
                      "        p++;\n"
-                     "        puts(""rejeita"");\n"
+                     "        puts(\"rejeita\");\n"
                      "    }\n");
        }
     else if(op == 2){
-
+        puts("falta ser implementado");
     }
     else{
         puts("opcao invalida");
@@ -151,5 +161,6 @@ void questionario () {
 }
 int main() {
     questionario();
+    fclose(arq);
     return 0;
 }
