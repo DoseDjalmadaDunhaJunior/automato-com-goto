@@ -213,11 +213,28 @@ void questionario () {
                              "    if(f[p] == '%c'){\n"
                              "        p++;\n"
                              "        e%i();\n"
-                             "    }\n"
+                             "}\n", j, sig[j], n);
+                for (int i = 0; i < Q; i++) {
+                    if(i != j) {
+                        fprintf(arq, "    else\n"
+                                     "\tif(f[p] == '%c'){\n"
+                                     "        p++;\n"
+                                     "        e%i();\n"
+                                     "}\n",sig[i], n);
+                    }
+                    if(sig[i] == 0){
+                        fprintf(arq, "    else\n"
+                                     "\tif(f[p] == 0){\n"
+                                     "        p++;\n"
+                                     "        e%i();\n"
+                                     "}\n", n);
+                    }
+                }
+                fprintf(arq, "    }\n"
                              "\telse{\n"
                              "\trejeita();\n"
                              "\t}\n"
-                             "}\n", j, sig[j], n);
+                             "}\n");
             }
         }
         fprintf(arq, "void aceita(){\n"
