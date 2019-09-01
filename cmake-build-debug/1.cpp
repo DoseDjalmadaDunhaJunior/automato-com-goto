@@ -15,46 +15,81 @@ int main(){
         p++;
         goto e1;
     }
+
 	else
 	if(f[p] == 'b'){
-	p++;
-		goto e2;
-}
-    else{
         p++;
+        goto e2;
+    }
+
+	else
+	if(f[p] == 'c'){
+        p++;
+        goto rejeita;
+    }
+
+	else{
         goto rejeita;
     }
 
     e1:
     if(f[p] == 'b'){
         p++;
-        goto e2;
+        goto e3;
     }
+
 	else
-	if(f[p] == 'b'){
-	p++;
-		goto e2;
-}
-    else{
+	if(f[p] == 'c'){
         p++;
         goto rejeita;
     }
 
-	e2:
-	if(f[p] == 0){
-		p++;
-		goto aceita;
-	}
 	else{
-		goto rejeita;
-}
-    aceita:
+        goto rejeita;
+    }
+
+    e2:
+    if(f[p] == 'c'){
         p++;
-        puts("aceita");
-	return 0;
-    
+        goto e3;
+    }
+
+	else
+	if(f[p] == 'b'){
+        p++;
+        goto rejeita;
+    }
+
+	else{
+        goto rejeita;
+    }
+
+    e3:
+    if(f[p] == 0){
+        p++;
+        goto aceita;
+    }
+
+	else
+	if(f[p] == 'b'){
+        p++;
+        goto rejeita;
+    }
+
+	else
+	if(f[p] == 'c'){
+        p++;
+        goto rejeita;
+    }
+
+	else{
+        goto rejeita;
+    }
+
     rejeita:
-        p++;
-        puts("rejeita");
-	return 0;
+    puts(":C");
+    return 0;
+
+    aceita:
+    puts("aceitou!!!");
     }
