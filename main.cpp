@@ -19,6 +19,7 @@ int qo = 0; // caso de entrada (para facilitar o raciocinio inicialmente ele ser
 int F; // quantidade de casos finais
 int fin[200]; // casos finais
 int n, m;// m = quantidade de simbolos
+int prox = 0;
 FILE *arq;
 
 void questionario () {
@@ -99,16 +100,28 @@ void questionario () {
             int verQ = Q;
             int vern = n;
             int verm = m;
-            if (n > Q) {
+            prox = i+1;
+            if (n >= Q) {
                 fprintf(arq, "\n"
                              "\te%i:\n"
-                             "\tif(f[p] == \'\n\'){\n"
+                             "\tif(f[p] == 0){\n"
                              "\t\tp++;\n"
-                             "\t\tgoto e%i;\n"
+                             "\t\tgoto aceita;\n"
                              "\t}\n"
                              "\telse{\n"
-                             "\t\tgoto rejeita();\n"
-                             "}\n", i, n);
+                             "\t\tgoto rejeita;\n"
+                             "}\n"
+                             "    aceita:\n"
+                             "        p++;\n"
+                             "        puts(\"aceita\");\n"
+                             "\treturn 0;\n"
+                             "    \n"
+                             "    rejeita:\n"
+                             "        p++;\n"
+                             "        puts(\"rejeita\");\n"
+                             "\treturn 0;\n"
+                             "    }\n", i);
+                return;
             } else {
                 if (i == (Q - 1)) {
                     fprintf(arq, "\n"
@@ -145,6 +158,7 @@ void questionario () {
                 if (n < m) {
                     fprintf(arq, "\telse\n"
                                  "\tif(f[p] == '%c'){\n"
+                                 "\tp++;\n"
                                  "\t\tgoto e%i;\n"
                                  "}\n", sig[n], (n + 1));
                 } else {
