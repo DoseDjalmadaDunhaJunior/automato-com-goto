@@ -54,7 +54,7 @@ void questionario () {
     printf("quant simbulos: %i\n"
            "n estados: %i\n"
            "n estados finais %i\n"
-           "caso inicial: %i\n", m, Q, F,qo);
+           "caso inicial: %i\n", m, Q, F, qo);
     puts("estados finais");
     for (int i1 = 0; i1 < Q; i1++) {
         cout << fin[i1] << " ";
@@ -155,15 +155,14 @@ void questionario () {
                 }
             }
         }
-    }
-    else if(op == 2){
+    } else if (op == 2) {
         fprintf(arq, "#include <iostream>\n"
                      "using namespace std;\n"
                      "\n");
         for (int i = 0; i < Q; i++) {
             fprintf(arq, "void e%i();\n", i);
         }
-        fprintf(arq,"\nvoid aceita();\n"
+        fprintf(arq, "\nvoid aceita();\n"
                      "void rejeita();\n"
                      "\n");
         fprintf(arq, "char f[200];\n"
@@ -171,42 +170,37 @@ void questionario () {
                      "\n");
         for (int j = 0; j < Q; j++) {
             n = (j + 1);
-        fprintf(arq, "void e%i(){\n"
-                     "    if(f[p] == '%c'){\n"
-                     "        p++;\n"
-                     "        e%i();\n"
-                     "    }\n"
-                     "}\n",j,sig[j],n);
-        if(j == (Q - 1)){
-            fprintf(arq, "\n"
-                         "void e%i(){\n"
-                         "    if(f[p] == 0){\n"
-                         "        p++;\n"
-                         "        aceita();\n"
-                         "\texit(0);\n"
-                         "    } else{\n"
-                         "        rejeita();\n"
-                         "\texit(0);\n"
-                         "    }\n"
-                         "}\n",j);
+            if (j == (Q - 1)) {
+                fprintf(arq, "\n"
+                             "void e%i(){\n"
+                             "    if(f[p] == 0){\n"
+                             "        p++;\n"
+                             "        aceita();\n"
+                             "\texit(0);\n"
+                             "    } else{\n"
+                             "        rejeita();\n"
+                             "\texit(0);\n"
+                             "    }\n"
+                             "}\n", j);
+            } else {
+                fprintf(arq, "void e%i(){\n"
+                             "    if(f[p] == '%c'){\n"
+                             "        p++;\n"
+                             "        e%i();\n"
+                             "    }\n"
+                             "}\n", j, sig[j], n);
+            }
         }
-        }
-        for (int k = 0; k < m; k++) {
-        }
-        fprintf(arq,                     "    else{\n"
-                                         "        rejeita();\n"
-                                         "    }\n"
-                                         "}\n");
         fprintf(arq, "\nint main() {\n"
                      "    cin>>f;\n"
                      "    e0();\n"
                      "    return 0;\n"
                      "}");
-    }
-    else{
+    } else {
         puts("opcao invalida");
     }
 }
+
 int main() {
     questionario();
     fclose(arq);
