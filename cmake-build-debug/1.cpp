@@ -17,7 +17,7 @@ int main(){
     }
 	else
 	if(f[p] == 'b'){
-		goto e1;
+		goto e2;
 }
     else{
         p++;
@@ -31,7 +31,7 @@ int main(){
     }
 	else
 	if(f[p] == 'b'){
-		goto e1;
+		goto e2;
 }
     else{
         p++;
@@ -45,7 +45,7 @@ int main(){
     }
 	else
 	if(f[p] == 'b'){
-		goto e1;
+		goto e2;
 }
     else{
         p++;

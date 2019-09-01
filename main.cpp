@@ -133,7 +133,7 @@ void questionario () {
                     fprintf(arq, "\telse\n"
                                  "\tif(f[p] == '%c'){\n"
                                  "\t\tgoto e%i;\n"
-                                 "}\n", sig[n],n);
+                                 "}\n", sig[n],(n+1));
                 }
                 else{
                     fprintf(arq, "    else{\n"
