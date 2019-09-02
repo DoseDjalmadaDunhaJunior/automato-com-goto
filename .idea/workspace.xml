@@ -137,7 +137,10 @@
       <workItem from="1567376881094" duration="42000" />
       <workItem from="1567376969359" duration="77000" />
       <workItem from="1567377114561" duration="121000" />
-      <workItem from="1567377633716" duration="911000" />
+      <workItem from="1567377633716" duration="1137000" />
+      <workItem from="1567379594234" duration="3384000" />
+      <workItem from="1567383068282" duration="215000" />
+      <workItem from="1567383329160" duration="55000" />
     </task>
     <servers />
   </component>
@@ -156,5 +159,16 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/main.cpp</url>
+          <line>224</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

@@ -118,7 +118,7 @@ void questionario () {
                                  "        goto aceita;\n"
                                  "    }\n", i);
                 } else {
-                    if(S[i][n] >= 0) {
+                    if (S[i][n] >= 0) {
                         fprintf(arq, "\n"
                                      "    e%i:\n"
                                      "    if(f[p] == '%c'){\n"
@@ -126,14 +126,13 @@ void questionario () {
                                      "        goto e%i;\n"
                                      "    }\n", i, sig[i], S[i][c]);
                         c++;
-                    }
-                    else {
-                            fprintf(arq, "\n"
-                                         "    e%i:\n"
-                                         "    if(f[p] == '%c'){\n"
-                                         "        p++;\n"
-                                         "        goto e%i;\n"
-                                         "    }\n", i, sig[i], S[i][c]);
+                    } else {
+                        fprintf(arq, "\n"
+                                     "    e%i:\n"
+                                     "    if(f[p] == '%c'){\n"
+                                     "        p++;\n"
+                                     "        goto e%i;\n"
+                                     "    }\n", i, sig[i], S[i][c]);
                         c++;
                     }
                 }
@@ -173,13 +172,13 @@ void questionario () {
                          "        goto rejeita;\n"
                          "    }\n");
         }
-            fprintf(arq, "\n"
-                         "    rejeita:\n"
-                         "    puts(\":C\");\n"
-                         "    return 0;\n\n"
-                         "    aceita:\n"
-                         "    puts(\"aceitou!!!\");\n"
-                         "    }\n");
+        fprintf(arq, "\n"
+                     "    rejeita:\n"
+                     "    puts(\":C\");\n"
+                     "    return 0;\n\n"
+                     "    aceita:\n"
+                     "    puts(\"aceitou!!!\");\n"
+                     "    }\n");
 
     } else if (op == 2) {
         fprintf(arq, "#include <iostream>\n"
@@ -209,28 +208,44 @@ void questionario () {
                              "    }\n"
                              "}\n", j);
             } else {
-                fprintf(arq, "void e%i(){\n"
-                             "    if(f[p] == '%c'){\n"
-                             "        p++;\n"
-                             "        e%i();\n"
-                             "}\n", j, sig[j], n);
-                for (int i = 0; i < Q; i++) {
-                    if(i != j) {
+                if (S[j][0] < 0) {
+                    fprintf(arq, "void e%i(){\n"
+                                 "    if(f[p] == '%c'){\n"
+                                 "        p++;\n"
+                                 "        rejeita();\n"
+                                 "}\n", j, sig[0]);
+                } else {
+                    fprintf(arq, "void e%i(){\n"
+                                 "    if(f[p] == '%c'){\n"
+                                 "        p++;\n"
+                                 "        e%i();\n"
+                                 "}\n", j, sig[0], n);
+                }
+                for (int i = 1; i < m; i++) {
+                    c++;
+                    if ((S[j][i]) < 0) {
+                        fprintf(arq, "    else\n"
+                                     "\tif(f[p] == '%c'){\n"
+                                     "        p++;\n"
+                                     "        rejeita();\n"
+                                     "}\n", sig[c]);
+                    } else {
                         fprintf(arq, "    else\n"
                                      "\tif(f[p] == '%c'){\n"
                                      "        p++;\n"
                                      "        e%i();\n"
-                                     "}\n",sig[i], n);
+                                     "}\n", sig[c], S[j][i]);
                     }
-                    if(sig[i] == 0){
+                    if (sig[i] == 0) {
                         fprintf(arq, "    else\n"
                                      "\tif(f[p] == 0){\n"
                                      "        p++;\n"
-                                     "        e%i();\n"
-                                     "}\n", n);
+                                     "        aceita();\n"
+                                     "}\n");
                     }
                 }
-                fprintf(arq, "    }\n"
+                c = 0;
+                fprintf(arq, "\n"
                              "\telse{\n"
                              "\trejeita();\n"
                              "\t}\n"
